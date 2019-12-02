@@ -181,6 +181,41 @@ class UnitTest(unittest.TestCase):
         test_chain = get_longest_chain(test_graph, max(test_labels, key=test_labels.get))
         self.assertEqual(test_chain['length'], 1)
 
+    def test_find_longest_road_file_4_1(self):
+        test_file = open('test4.txt', 'r')
+        test_data = get_data(test_file)
+        test_file.close()
+        test_graph = create_graph(test_data)
+        test_labels = {test_vertex: len(test_vertex.label) for test_vertex in test_graph.vertices}
+        test_chain = get_longest_chain(test_graph, max(test_labels, key=test_labels.get))
+        self.assertEqual(test_chain['length'], 6)
+
+    def test_find_longest_road_file_4_2(self):
+        test_file = open('test4.txt', 'r')
+        test_data = get_data(test_file)
+        test_start_vertex = ''
+        test_file.close()
+        test_graph = create_graph(test_data)
+        test_vertices = test_graph.vertices
+        for test_vertex in test_vertices:
+            if test_vertex.label == 'btter':
+                test_start_vertex = test_vertex
+        test_chain = get_longest_chain(test_graph, test_start_vertex)
+        self.assertEqual(test_chain['length'], 5)
+
+    def test_find_longest_road_file_4_3(self):
+        test_file = open('test4.txt', 'r')
+        test_data = get_data(test_file)
+        test_start_vertex = ''
+        test_file.close()
+        test_graph = create_graph(test_data)
+        test_vertices = test_graph.vertices
+        for test_vertex in test_vertices:
+            if test_vertex.label == 'butte':
+                test_start_vertex = test_vertex
+        test_chain = get_longest_chain(test_graph, test_start_vertex)
+        self.assertEqual(test_chain['length'], 4)
+
 
 if __name__ == '__main__':
     unittest.main()
